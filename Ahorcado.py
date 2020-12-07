@@ -1,63 +1,15 @@
+from images import IMAGES
+from utils import clear
 
 intentos = 0
-IMAGES = ['''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========''']
-
 
 def main():
     es_una_letra = False
     juego_terminado = False
     global IMAGES
     global intentos
-
+    
+    clear()
     print("JUEGO DEL AHORCADO!!!!\n")
     # INPUT DE LOS DATOS
     frase_ingresada = input(
@@ -70,26 +22,28 @@ def main():
 
     progreso = ['_'] * len(frase_ingresada_lista)
     print(progreso)
+    clear()
 
     # PEDIR UNA LETRA, SI SON MAS DE UNA, VOLVER A PEDIRLA
     while es_una_letra is False or juego_terminado is False:
 
         print(IMAGES[intentos])
-
-        letra = input('\nIngresa SOLO UNA letra...:').strip().lower()
+        print(progreso)
+        letra = input('\nIngresa SOLO UNA letra...: ').strip().lower()
         if len(letra) == 1:
-            progreso = verificaLetra(letra, frase_ingresada, progreso)
+            progreso = verifica_letra(letra, frase_ingresada, progreso)
             es_una_letra = True
             try:
                 progreso.index('_') == -1
             except ValueError:
                 juego_terminado = True
                 print('FELICIDADES, ENCONTRASTE LA FRASE ESCONDIDA!!!')
+                break
             if intentos == 6:
                 juego_terminado == True
                 print('No has encontrado la frase escondida, FIN DEL JUEGO!')
                 break
-
+        clear()
     # lista_indices = verificaLetra(letra, frase_ingresada)
     # print(lista_indices)
 
@@ -97,7 +51,9 @@ def main():
 intentos = 0
 
 
-def verificaLetra(letra, lista_cadena, progreso):
+def verifica_letra(letra, lista_cadena, progreso):
+    """
+    """
     indice = []  # INDICES A REGRESAR
     cadena = "".join(lista_cadena)  # CADENA JNTA
     size_cadena = len(cadena)  # TAMANO DE LA CADENA
@@ -119,7 +75,7 @@ def verificaLetra(letra, lista_cadena, progreso):
     if len(indice) == 0:
         intentos += 1
 
-    print(progreso)
+    # print(progreso)
 
     return progreso
 
