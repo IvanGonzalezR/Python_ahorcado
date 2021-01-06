@@ -3,12 +3,13 @@ from utils import clear
 
 intentos = 0
 
+
 def main():
     es_una_letra = False
     juego_terminado = False
     global IMAGES
     global intentos
-    
+
     clear()
     print("JUEGO DEL AHORCADO!!!!\n")
     # INPUT DE LOS DATOS
